@@ -9,4 +9,12 @@ export class UsersController {
       email: 'pratim.com',
     };
   }
+  @Get('posts')
+  getUserPosts() {
+    return [
+      {
+        name: 'pratim',
+      },
+    ];
+  }
 }
