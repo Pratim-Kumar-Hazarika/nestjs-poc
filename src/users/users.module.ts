@@ -14,6 +14,7 @@ import { ExampleMiddleware } from './middlewares/example/example.middleware';
 })
 export class UsersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
+    /**For all routes */
     // consumer.apply(ExampleMiddleware).forRoutes('users');
 
     //**For few routes */
