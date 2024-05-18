@@ -7,6 +7,7 @@ import {
 import { UsersController } from './controllers/users/users.controller';
 import { UsersService } from './services/users/users.service';
 import { ExampleMiddleware } from './middlewares/example/example.middleware';
+import { AnothermiddlewareMiddleware } from './middlewares/anothermiddleware/anothermiddleware.middleware';
 
 @Module({
   controllers: [UsersController],
@@ -18,15 +19,28 @@ export class UsersModule implements NestModule {
     // consumer.apply(ExampleMiddleware).forRoutes('users');
 
     //**For few routes */
-    consumer.apply(ExampleMiddleware).forRoutes(
-      {
-        path: 'users',
-        method: RequestMethod.GET,
-      },
-      {
-        path: 'users/:id',
-        method: RequestMethod.GET,
-      },
-    );
+    consumer
+      .apply(ExampleMiddleware)
+      .forRoutes(
+        {
+          path: 'users',
+          method: RequestMethod.GET,
+        },
+        {
+          path: 'users/:id',
+          method: RequestMethod.GET,
+        },
+      )
+      .apply(AnothermiddlewareMiddleware)
+      .forRoutes(
+        {
+          path: 'users',
+          method: RequestMethod.GET,
+        },
+        {
+          path: 'users/:id',
+          method: RequestMethod.GET,
+        },
+      );
   }
 }
