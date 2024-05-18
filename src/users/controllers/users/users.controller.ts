@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, Req, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { Request, Response } from 'express';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 
@@ -31,15 +40,24 @@ export class UsersController {
     return {};
   }
 
-  @Get(':id')
-  getUserById(@Param('id') id: string) {
-    console.log(id);
-    return { id };
-  }
+  // @Get(':id')
+  // getUserById(@Param('id') id: string) {
+  //   console.log(id);
+  //   return { id };
+  // }
 
   @Get(':id/:postId')
   getNestedParams(@Param('id') id: string, @Param('postId') postId: string) {
     console.log(id);
     return { id, postId };
+  }
+
+  @Get(':id')
+  getQueryParams(@Query('sortBy') sortBy: string) {
+    console.log(sortBy);
+    return {
+      userName: 'Pratim',
+      email: 'pratim.com',
+    };
   }
 }
