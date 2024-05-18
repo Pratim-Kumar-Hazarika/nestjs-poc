@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  ParseBoolPipe,
   ParseIntPipe,
   Post,
   Query,
@@ -44,11 +45,11 @@ export class UsersController {
     return {};
   }
 
-  @Get(':id')
-  getUserById(@Param('id', ParseIntPipe) id: number) {
-    console.log('Id==>', id);
-    return { id };
-  }
+  // @Get(':id')
+  // getUserById(@Param('id', ParseIntPipe) id: number) {
+  //   console.log('Id==>', id);
+  //   return { id };
+  // }
 
   @Get(':id/:postId')
   getNestedParams(@Param('id') id: string, @Param('postId') postId: string) {
@@ -56,12 +57,12 @@ export class UsersController {
     return { id, postId };
   }
 
-  // @Get(':id')
-  // getQueryParams(@Query('sortBy') sortBy: string) {
-  //   console.log(sortBy);
-  //   return {
-  //     userName: 'Pratim',
-  //     email: 'pratim.com',
-  //   };
-  // }
+  @Get(':id')
+  getQueryParams(@Query('sortBy', ParseBoolPipe) sortBy: boolean) {
+    console.log(sortBy);
+    return {
+      userName: 'Pratim',
+      email: 'pratim.com',
+    };
+  }
 }
